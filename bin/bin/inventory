@@ -1,0 +1,18 @@
+#!/bin/sh
+
+AWS_PROFILE=$1
+if [ -z "$AWS_PROFILE" ]
+then
+    AWS_PROFILE=ecomhq
+fi
+
+STATE=running
+if [ -n "$2" ]
+then 
+     STATE=$2
+fi
+
+aws --profile $AWS_PROFILE ec2 describe-instances \
+    --filters "Name=instance-state-name,Values=$STATE" \
+     | jq -r ".Reservations[].Instances[] | [.State.Name, .InstanceId, .PrivateIpAddress, .PublicIpAddress, .Tags[].Value]"
+

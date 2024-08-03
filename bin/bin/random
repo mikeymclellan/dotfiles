@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dd if=/dev/random bs=4096 count=1 2>/dev/null | openssl sha224 -binary | base64
+

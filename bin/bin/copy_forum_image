@@ -1,0 +1,19 @@
+#!/bin/sh
+
+DEST=$2
+if [ -z $DEST ] 
+then
+    DEST=`basename $1`
+fi
+DEST=`echo $DEST|sed "s/ /_/g"`
+
+# Fix up EXIF rotation data
+jhead -v -autorot "$1"
+
+aws --profile=mclellan s3 cp "$1" "s3://forum-media/$DEST"
+
+if [ $? -eq 0 ] 
+then
+    echo https://s3-ap-southeast-2.amazonaws.com/forum-media/$DEST
+fi
+

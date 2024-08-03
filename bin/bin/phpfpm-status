@@ -1,0 +1,10 @@
+#!/bin/sh
+
+AWS_PROFILE=$1
+if [ -z "$AWS_PROFILE" ]
+then
+    AWS_PROFILE=ecomhq
+fi
+WEBSERVER_IP_ADDRESS=`inventory $AWS_PROFILE | jq -r "select(.[]|contains(\"webserver\"))|.[2]" | head -1`
+curl http://$WEBSERVER_IP_ADDRESS/status
+

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+WEBSERVER_IP_ADDRESS=`inventory ecomhq | jq -r "select(.[]|contains(\"webserver\"))|.[2]"|head -1`
+
+ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" $WEBSERVER_IP_ADDRESS "sudo -u www-data /srv/subscription/bin/console $@"
+

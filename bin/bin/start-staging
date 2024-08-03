@@ -1,0 +1,4 @@
+#!/bin/sh
+
+aws --profile=pethq-dev ec2 start-instances --instance-ids i-0c240bdefd9caa000
+

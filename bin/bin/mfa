@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ oathtool --base32 --totp "$(cat ~/.aws/$1.mfa)" | pbcopy
+
+
+
