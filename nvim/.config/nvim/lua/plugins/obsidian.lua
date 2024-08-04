@@ -31,11 +31,18 @@ return {
 			daily_notes = {
 				folder = "Daily",
 				template = "Daily",
+				default_tags = { "daily-notes" },
+				date_format = "/%Y/%B/%Y-%m-%d",
 			},
 			templates = {
 				folder = "Templates",
-				date_format = "%Y-%m-%d",
+				date_format = "%A, %B %-d %Y",
 				time_format = "%h:%m%a",
+				substitutions = {
+					["date-long"] = function()
+						return os.date("%A, %B %-d %Y ", os.time())
+					end,
+				},
 			},
 		})
 		vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>", {})
