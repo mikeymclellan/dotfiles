@@ -4,6 +4,7 @@ vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
 vim.cmd("set relativenumber")
 vim.cmd("set colorcolumn=72")
+
 vim.g.mapleader = " "
 vim.g.background = "light"
 
