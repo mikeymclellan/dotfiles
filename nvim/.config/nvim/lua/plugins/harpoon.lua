@@ -25,8 +25,9 @@ return {
             }):find()
         end
 
-        vim.keymap.set("n", "<leader>hh", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
-        -- vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        -- Disabled Telescope list as you can't remove items from the Telescope list
+        -- vim.keymap.set("n", "<leader>hh", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
+        vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
         -- naviagte harpoon files with Tab
         vim.keymap.set('n', '<tab>', function() harpoon:list():next({ui_nav_wrap = true}) end)
