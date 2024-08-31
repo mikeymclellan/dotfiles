@@ -1,3 +1,4 @@
 alias vi=nvim
 alias vim=nvim
 alias o="cd ~/Documents/Obsidian"
+alias mux="tmuxinator start"
