@@ -1,6 +1,19 @@
-#!/bin/sh
+#!/bin/zsh
 
-WEBSERVER_IP_ADDRESS=`inventory ecomhq | jq -r "select(.[]|contains(\"webserver\"))|.[2]"|head -1`
+WEBSERVER_IP_ADDRESS=`inventory ecomhq | jq -r "select(.[]?| . != null and contains(\"webserver\")) | .[2]" | head -1 2>&1`
 
-ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" $WEBSERVER_IP_ADDRESS "sudo -u www-data /srv/subscription/bin/console $@"
+function run_doug() {
+    ssh -o "StrictHostKeyChecking=no" \
+        -o "UserKnownHostsFile=/dev/null" \
+        $WEBSERVER_IP_ADDRESS \
+        "sudo -u www-data /srv/subscription/bin/console $@" 2>&1 \
+        | grep -v "Warning: Permanently"
+}
 
+if [ "$#" -lt 1 ]; then
+    CMD=`run_doug | grep -E "^  [a-z].*:" | fzf | cut -c2-60`
+    run_doug $CMD --help
+    print -z doug $CMD
+else
+    run_doug $@
+fi

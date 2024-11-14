@@ -14,5 +14,5 @@ fi
 
 aws --profile $AWS_PROFILE ec2 describe-instances \
     --filters "Name=instance-state-name,Values=$STATE" \
-     | jq -r ".Reservations[].Instances[] | [.State.Name, .InstanceId, .PrivateIpAddress, .PublicIpAddress, .Tags[].Value]"
+     | jq -r ".Reservations[].Instances[] | [.State.Name, .InstanceId, .PrivateIpAddress, .PublicIpAddress, .Tags[].Value]" 2>&1
 
