@@ -1,4 +1,3 @@
-local net = require("utils.net")
 
 return {
   "yetone/avante.nvim",
@@ -13,7 +12,6 @@ return {
   version = false, -- Never set this value to "*"! Never!
   opts = function()
     local provider = 'openai'
-    if not net.github_reachable() then
       if os.getenv('OPENAI_API_KEY') then
         provider = 'openai'
       elseif os.getenv('ANTHROPIC_API_KEY') then
@@ -23,7 +21,6 @@ return {
       else
         provider = 'copilot'
       end
-    end
     return {
   debug = false,
   mode = "agentic",

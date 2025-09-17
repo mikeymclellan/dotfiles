@@ -37,11 +37,21 @@ vim.keymap.set("n", "<leader>q", ":tabclose<CR>", {})
 
 vim.keymap.set('v', '<leader>y', '"*y')
 
--- Copy current buffer's filename to system clipboard
-vim.keymap.set('n', '<leader>cn', function()
-    local filename = vim.fn.expand('%:p')
-    vim.fn.setreg('+', filename)
-    print('Copied filename to clipboard: ' .. filename)
+-- Copy current buffer's filename relative to the current working directory to the system clipboard
+vim.keymap.set('n', '<leader>cp', function()
+    local filename = vim.api.nvim_buf_get_name(0)
+    if filename == '' then
+        print('No file name for current buffer')
+        return
+    end
+
+    local relative = vim.fn.fnamemodify(filename, ':.')
+    if relative == '' then
+        relative = filename
+    end
+
+    vim.fn.setreg('+', relative)
+    print('Copied filename to clipboard: ' .. relative)
 end)
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
