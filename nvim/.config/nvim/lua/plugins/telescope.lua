@@ -24,11 +24,11 @@ return {
 
             local find_all_files = function()
                 -- builtin.find_files({additional_args = {"--no-ignore-vcs"}})
-                builtin.find_files { find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' } }
+                builtin.find_files { find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', '--no-ignore-vcs' } }
             end
 
             local live_grep_all_files = function()
-                builtin.live_grep({additional_args = {"--no-ignore-vcs"}})
+                builtin.live_grep({additional_args = {'--iglob', '!.git', '--hidden', '--no-ignore-vcs'}})
             end
 
             vim.keymap.set("n", "<leader>ff", builtin.find_files, {})

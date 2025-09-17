@@ -24,8 +24,8 @@ vim.keymap.set('n', 'N', 'Nzz')
 vim.keymap.set('n', '<c-t>', '<c-t>zz')
 
 -- navigate buffers with Tab
--- vim.keymap.set('n', '<tab>', ':bnext<CR>')
--- vim.keymap.set('n', '<s-tab>', ':bprevious<CR>')
+vim.keymap.set('n', '<tab>', ':bnext<CR>')
+vim.keymap.set('n', '<s-tab>', ':bprevious<CR>')
 vim.keymap.set("n", '<leader>abd', ':%bd|e#<CR>', {}) -- Close all buffers except the current one
 
 -- for some reason I need to map these here rather than in the gitsigns config :thinking-face:
