@@ -8,9 +8,9 @@ fi
 DEST=`echo $DEST|sed "s/ /_/g"`
 
 # Fix up EXIF rotation data
-jhead -v -autorot "$1"
+jhead -v -autorot "$1" > /dev/null 2>&1
 
-aws --profile=mclellan s3 cp "$1" "s3://forum-media/$DEST"
+aws --profile=mclellan s3 cp "$1" "s3://forum-media/$DEST" > /dev/null
 
 if [ $? -eq 0 ] 
 then
