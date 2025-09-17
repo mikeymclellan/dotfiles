@@ -1,4 +1,4 @@
-return {
+local conf = {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -34,3 +34,6 @@ return {
         vim.keymap.set('n', '<s-tab>', function() harpoon:list():prev({ui_nav_wrap = true}) end)
    end,
 }
+
+-- Disable Harpooon for now
+return {}
