@@ -22,6 +22,10 @@ return {
                     path = "~/Documents/Obsidian",
                 },
             },
+            ui = {
+                enable = false,
+            },
+            -- log_level = vim.log.levels.ERROR,
             completion = {
                 -- Set to false to disable completion.
                 nvim_cmp = true,
@@ -64,7 +68,24 @@ return {
                 return os.date("%Y-%m-%d %H:%M", os.time()) .. "-" .. suffix
             end,
         })
+        local function create_weekly_note()
+            local current_time = os.time()
+            local current_day = os.date("*t", current_time).wday
+            -- Calculate the offset to get to Monday (1 = Sunday, 2 = Monday, ..., 7 = Saturday)
+            local offset = current_day == 1 and -6 or 2 - current_day
+            local monday_time = current_time + (offset * 24 * 60 * 60)
+            local monday_date = os.date("%Y-%m-%d", monday_time)
+            print("Creating weekly note for: " .. monday_date)
+            -- Create a new note for the calculated Monday
+            require("obsidian").new_note({
+                title = "Weekly Note - " .. monday_date,
+                template = "Weekly",
+                tags = { "weekly-notes" },
+            })
+        end
+
         vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>", {})
+        vim.keymap.set("n", "<leader>ow", create_weekly_note, {})
         vim.keymap.set("n", "<leader>os", ":ObsidianSearch<CR>", {})
         vim.keymap.set("n", "<leader>ot", ":ObsidianTemplate<CR>", {})
         vim.keymap.set("n", "<leader>on", ":ObsidianNewFromTemplate<CR>", {})
