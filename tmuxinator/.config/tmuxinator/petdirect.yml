@@ -59,7 +59,7 @@ windows:
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - nvim .
+        - nvim
 
   - Subscription:
       layout: main-vertical
@@ -69,7 +69,7 @@ windows:
       panes:
         - nvim
         - 
-        - /usr/local/bin/docker compose up
+        - /usr/local/bin/docker compose start
 
   - Frontend:
       root: ~/Code/WebSites/petdirect
