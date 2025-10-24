@@ -3,14 +3,6 @@ return {
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = false,
     ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    --   -- refer to `:h file-pattern` for more examples
-    --   "BufReadPre path/to/my-vault/*.md",
-    --   "BufNewFile path/to/my-vault/*.md",
-    -- },
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
@@ -25,6 +17,8 @@ return {
             ui = {
                 enable = false,
             },
+            -- Disable all default mappings
+            mappings = {},
             -- log_level = vim.log.levels.ERROR,
             completion = {
                 -- Set to false to disable completion.
@@ -83,6 +77,19 @@ return {
                 tags = { "weekly-notes" },
             })
         end
+
+        -- Set up <CR> mapping for markdown files to cycle through checkbox states
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "markdown",
+            callback = function(ev)
+                -- Only set up mapping for normal files (not special buffers like neo-tree)
+                if vim.bo[ev.buf].buftype == "" then
+                    vim.keymap.set("n", "<CR>", function()
+                        vim.cmd("ObsidianToggleCheckbox")
+                    end, { buffer = ev.buf, desc = "Toggle checkbox" })
+                end
+            end,
+        })
 
         vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>", {})
         vim.keymap.set("n", "<leader>ow", create_weekly_note, {})
