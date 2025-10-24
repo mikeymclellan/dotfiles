@@ -17,11 +17,11 @@ vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
 vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 -- Centre the screen when jumping
-vim.keymap.set('n', '<c-f>', '<c-f>zz')
-vim.keymap.set('n', '<c-b>', '<c-b>zz')
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
-vim.keymap.set('n', '<c-t>', '<c-t>zz')
+-- vim.keymap.set('n', '<c-f>', '<c-f>zz')
+-- vim.keymap.set('n', '<c-b>', '<c-b>zz')
+-- vim.keymap.set('n', 'n', 'nzz')
+-- vim.keymap.set('n', 'N', 'Nzz')
+-- vim.keymap.set('n', '<c-t>', '<c-t>zz')
 
 -- navigate buffers with Tab
 vim.keymap.set('n', '<tab>', ':bnext<CR>')
