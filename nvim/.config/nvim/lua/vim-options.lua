@@ -51,7 +51,7 @@ vim.keymap.set('n', '<leader>cp', function()
     end
 
     vim.fn.setreg('+', relative)
-    print('Copied filename to clipboard: ' .. relative)
+    print('Copied file path: ' .. relative)
 end)
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')

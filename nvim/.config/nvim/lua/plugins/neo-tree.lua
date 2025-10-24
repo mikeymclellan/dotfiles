@@ -36,6 +36,8 @@ return {
                 window = {
                     mappings = {
                         ['oa'] = 'avante_add_files',
+                        -- Explicitly set <CR> to prevent obsidian.nvim from overriding
+                        ['<CR>'] = 'open',
                     },
                 },
             }
