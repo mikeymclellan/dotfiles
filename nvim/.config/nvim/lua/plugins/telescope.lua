@@ -8,6 +8,14 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("telescope").setup({
+                defaults = {
+                    layout_config = {
+                        horizontal = {
+                            preview_width = 0.75, -- 65% of the width for preview
+                            width = 0.95
+                        },
+                    },
+                },
                 pickers = {
                     find_files = {
                         hidden = true,
@@ -32,6 +40,7 @@ return {
             end
 
             vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+            vim.keymap.set("n", "<leader>fg", builtin.git_status, {})
             vim.keymap.set("n", "<leader>faf", find_all_files, {})
             vim.keymap.set("n", "<leader>fw", builtin.live_grep, {})
             vim.keymap.set("n", "<leader>faw", live_grep_all_files, {})
