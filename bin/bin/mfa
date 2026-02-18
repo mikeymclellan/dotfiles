@@ -1,6 +1,29 @@
 #!/bin/sh
 
- oathtool --base32 --totp "$(cat ~/.aws/$1.mfa)" | pbcopy
+# Generate the TOTP code
+code=$(oathtool --base32 --totp "$(cat ~/.aws/$1.mfa)")
+
+# Copy to clipboard based on platform
+if command -v pbcopy >/dev/null 2>&1; then
+    # macOS
+    echo "$code" | pbcopy
+elif command -v wl-copy >/dev/null 2>&1; then
+    # Wayland (Linux)
+    echo "$code" | wl-copy
+elif command -v xclip >/dev/null 2>&1; then
+    # X11 (Linux)
+    echo "$code" | xclip -selection clipboard
+elif command -v xsel >/dev/null 2>&1; then
+    # X11 alternative (Linux)
+    echo "$code" | xsel --clipboard
+else
+    # No clipboard tool found, just print it
+    echo "Clipboard tool not found. Your code is:"
+    echo "$code"
+    exit 1
+fi
+
+echo "MFA code copied to clipboard"
 
 
 

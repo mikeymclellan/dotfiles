@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 WEBSERVER_IP_ADDRESS=`inventory ecomhq | jq -r "select(.[]?| . != null and contains(\"webserver\")) | .[2]" | head -1 2>&1`
 
@@ -6,7 +6,7 @@ function run_doug() {
     ssh -o "StrictHostKeyChecking=no" \
         -o "UserKnownHostsFile=/dev/null" \
         $WEBSERVER_IP_ADDRESS \
-        "sudo -u www-data /srv/subscription/bin/console $@" 2>&1 \
+        "sudo -u www-data php -d memory_limit=1G /srv/subscription/bin/console $@" 2>&1 \
         | grep -v "Warning: Permanently"
 }
 

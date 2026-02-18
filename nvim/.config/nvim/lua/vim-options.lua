@@ -35,7 +35,7 @@ vim.keymap.set("n", "<leader>gb", ":Gitsigns blame_line<CR>", {})
 vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", {})
 vim.keymap.set("n", "<leader>q", ":tabclose<CR>", {})
 
-vim.keymap.set('v', '<leader>y', '"*y')
+vim.keymap.set('v', '<leader>y', '"+y')
 
 -- Copy current buffer's filename relative to the current working directory to the system clipboard
 vim.keymap.set('n', '<leader>cp', function()

@@ -4,14 +4,14 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
+        branch = "master",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("telescope").setup({
                 defaults = {
                     layout_config = {
                         horizontal = {
-                            preview_width = 0.75, -- 65% of the width for preview
+                            preview_width = 0.65, -- 65% of the width for preview
                             width = 0.95
                         },
                     },
