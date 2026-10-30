@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -u
+cd /home/mikey/Documents/Obsidian || exit 1
+git add -A
+git diff --cached --quiet || git commit -qm "auto: $(date -Is)"
+git pull --rebase --autostash -q && git push -q
