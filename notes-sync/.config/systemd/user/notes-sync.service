@@ -3,4 +3,5 @@ Description=Sync notes with GitHub
 
 [Service]
 Type=oneshot
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 ExecStart=%h/.local/bin/notes-sync
